@@ -196,86 +196,103 @@ func GetAsInt(pdu gosnmp.SnmpPDU) int {
 	return 0
 }
 
-// Get PDU value as an float32 value.  PDU value should be a numeric type, else 0 will be returned.
+// Get PDU value as an float32 value.
 // It is common for SNMP agents to return floating point values as strings since the ASN opaque float
 // is not fully supported by SNMP systems.  If the PDU value is a string, an attempt will be made to
-// convert back to float.
-// Be warned that truncation may occur in multiple cases.
+// convert back to float. Be warned that truncation may occur in multiple cases.
 // If PDU value is nil, 0 will be returned.
 func GetAsFloat32(pdu gosnmp.SnmpPDU) float32 {
 	if pdu.Value != nil {
-		switch v := pdu.Value.(type) {
-		case []byte:
-			if pdu.Type == gosnmp.OctetString {
-				f, _ := strconv.ParseFloat(string(v), 32)
-				return float32(f)
+		if pdu.Type == gosnmp.OctetString {
+			var s string
+			switch v := pdu.Value.(type) {
+			case string:
+				s = v
+			case []byte:
+				s = string(v)
+			default:
+				return 0
 			}
-		case uint8:
-			return float32(v)
-		case uint16:
-			return float32(v)
-		case uint32:
-			return float32(v)
-		case uint64:
-			return float32(v)
-		case uint:
-			return float32(v)
-		case int8:
-			return float32(v)
-		case int16:
-			return float32(v)
-		case int32:
-			return float32(v)
-		case int64:
-			return float32(v)
-		case int:
-			return float32(v)
-		case float32:
-			return v
-		case float64:
-			return float32(v)
+			f, _ := strconv.ParseFloat(s, 32)
+			return float32(f)
+		} else {
+			switch v := pdu.Value.(type) {
+			case uint8:
+				return float32(v)
+			case uint16:
+				return float32(v)
+			case uint32:
+				return float32(v)
+			case uint64:
+				return float32(v)
+			case uint:
+				return float32(v)
+			case int8:
+				return float32(v)
+			case int16:
+				return float32(v)
+			case int32:
+				return float32(v)
+			case int64:
+				return float32(v)
+			case int:
+				return float32(v)
+			case float32:
+				return v
+			case float64:
+				return float32(v)
+			}
 		}
 	}
 	return 0
 }
 
-// Get PDU value as an float64 value.  PDU value should be a numeric type, else 0 will be returned.
+// Get PDU value as an float64 value.
 // It is common for SNMP agents to return floating point values as strings since the ASN opaque float
 // is not fully supported by SNMP systems.  If the PDU value is a string, an attempt will be made to
-// convert back to float.
+// convert back to float.)
 // If PDU value is nil, 0 will be returned.
 func GetAsFloat64(pdu gosnmp.SnmpPDU) float64 {
 	if pdu.Value != nil {
-		switch v := pdu.Value.(type) {
-		case []byte:
-			if pdu.Type == gosnmp.OctetString {
-				f, _ := strconv.ParseFloat(string(v), 64)
-				return f
+		if pdu.Type == gosnmp.OctetString {
+			var s string
+			switch v := pdu.Value.(type) {
+			case string:
+				s = v
+			case []byte:
+				s = string(v)
+			default:
+				return 0
 			}
-		case uint8:
-			return float64(v)
-		case uint16:
-			return float64(v)
-		case uint32:
-			return float64(v)
-		case uint64:
-			return float64(v)
-		case uint:
-			return float64(v)
-		case int8:
-			return float64(v)
-		case int16:
-			return float64(v)
-		case int32:
-			return float64(v)
-		case int64:
-			return float64(v)
-		case int:
-			return float64(v)
-		case float32:
-			return float64(v)
-		case float64:
-			return v
+			f, _ := strconv.ParseFloat(s, 64)
+			return f
+		} else {
+			switch v := pdu.Value.(type) {
+			case uint8:
+				return float64(v)
+			case uint16:
+				return float64(v)
+			case uint32:
+				return float64(v)
+			case uint64:
+				return float64(v)
+			case uint:
+				return float64(v)
+			case int8:
+				return float64(v)
+			case int16:
+				return float64(v)
+			case int32:
+				return float64(v)
+			case int64:
+				return float64(v)
+			case int:
+				return float64(v)
+			case float32:
+				return float64(v)
+			case float64:
+				return v
+			}
 		}
 	}
 	return 0
