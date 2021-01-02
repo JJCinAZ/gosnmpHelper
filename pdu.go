@@ -12,27 +12,41 @@ import (
 // If PDU value is nil, 0 will be returned.
 func GetAsUint32(pdu gosnmp.SnmpPDU) uint32 {
 	if pdu.Value != nil {
-		switch v := pdu.Value.(type) {
-		case uint8:
-			return uint32(v)
-		case uint16:
-			return uint32(v)
-		case uint32:
-			return v
-		case uint64:
-			return uint32(v)
-		case uint:
-			return uint32(v)
-		case int8:
-			return uint32(v)
-		case int16:
-			return uint32(v)
-		case int32:
-			return uint32(v)
-		case int64:
-			return uint32(v)
-		case int:
-			return uint32(v)
+		if pdu.Type == gosnmp.OctetString {
+			var s string
+			switch v := pdu.Value.(type) {
+			case string:
+				s = v
+			case []byte:
+				s = string(v)
+			default:
+				return 0
+			}
+			i, _ := strconv.ParseUint(s, 10, 32)
+			return uint32(i)
+		} else {
+			switch v := pdu.Value.(type) {
+			case uint8:
+				return uint32(v)
+			case uint16:
+				return uint32(v)
+			case uint32:
+				return v
+			case uint64:
+				return uint32(v)
+			case uint:
+				return uint32(v)
+			case int8:
+				return uint32(v)
+			case int16:
+				return uint32(v)
+			case int32:
+				return uint32(v)
+			case int64:
+				return uint32(v)
+			case int:
+				return uint32(v)
+			}
 		}
 	}
 	return 0
@@ -43,27 +57,41 @@ func GetAsUint32(pdu gosnmp.SnmpPDU) uint32 {
 // If PDU value is nil, 0 will be returned.
 func GetAsUint64(pdu gosnmp.SnmpPDU) uint64 {
 	if pdu.Value != nil {
-		switch v := pdu.Value.(type) {
-		case uint8:
-			return uint64(v)
-		case uint16:
-			return uint64(v)
-		case uint32:
-			return uint64(v)
-		case uint64:
-			return v
-		case uint:
-			return uint64(v)
-		case int8:
-			return uint64(v)
-		case int16:
-			return uint64(v)
-		case int32:
-			return uint64(v)
-		case int64:
-			return uint64(v)
-		case int:
-			return uint64(v)
+		if pdu.Type == gosnmp.OctetString {
+			var s string
+			switch v := pdu.Value.(type) {
+			case string:
+				s = v
+			case []byte:
+				s = string(v)
+			default:
+				return 0
+			}
+			i, _ := strconv.ParseUint(s, 10, 64)
+			return i
+		} else {
+			switch v := pdu.Value.(type) {
+			case uint8:
+				return uint64(v)
+			case uint16:
+				return uint64(v)
+			case uint32:
+				return uint64(v)
+			case uint64:
+				return v
+			case uint:
+				return uint64(v)
+			case int8:
+				return uint64(v)
+			case int16:
+				return uint64(v)
+			case int32:
+				return uint64(v)
+			case int64:
+				return uint64(v)
+			case int:
+				return uint64(v)
+			}
 		}
 	}
 	return 0
@@ -74,27 +102,41 @@ func GetAsUint64(pdu gosnmp.SnmpPDU) uint64 {
 // If PDU value is nil, 0 will be returned.
 func GetAsUint(pdu gosnmp.SnmpPDU) uint {
 	if pdu.Value != nil {
-		switch v := pdu.Value.(type) {
-		case uint8:
-			return uint(v)
-		case uint16:
-			return uint(v)
-		case uint32:
-			return uint(v)
-		case uint64:
-			return uint(v)
-		case uint:
-			return v
-		case int8:
-			return uint(v)
-		case int16:
-			return uint(v)
-		case int32:
-			return uint(v)
-		case int64:
-			return uint(v)
-		case int:
-			return uint(v)
+		if pdu.Type == gosnmp.OctetString {
+			var s string
+			switch v := pdu.Value.(type) {
+			case string:
+				s = v
+			case []byte:
+				s = string(v)
+			default:
+				return 0
+			}
+			i, _ := strconv.ParseUint(s, 10, 64)
+			return uint(i)
+		} else {
+			switch v := pdu.Value.(type) {
+			case uint8:
+				return uint(v)
+			case uint16:
+				return uint(v)
+			case uint32:
+				return uint(v)
+			case uint64:
+				return uint(v)
+			case uint:
+				return v
+			case int8:
+				return uint(v)
+			case int16:
+				return uint(v)
+			case int32:
+				return uint(v)
+			case int64:
+				return uint(v)
+			case int:
+				return uint(v)
+			}
 		}
 	}
 	return 0
@@ -107,27 +149,41 @@ func GetAsUint(pdu gosnmp.SnmpPDU) uint {
 // If PDU value is nil, 0 will be returned.
 func GetAsInt32(pdu gosnmp.SnmpPDU) int32 {
 	if pdu.Value != nil {
-		switch v := pdu.Value.(type) {
-		case uint8:
-			return int32(v)
-		case uint16:
-			return int32(v)
-		case uint32:
-			return int32(v)
-		case uint64:
-			return int32(v)
-		case uint:
-			return int32(v)
-		case int8:
-			return int32(v)
-		case int16:
-			return int32(v)
-		case int32:
-			return v
-		case int64:
-			return int32(v)
-		case int:
-			return int32(v)
+		if pdu.Type == gosnmp.OctetString {
+			var s string
+			switch v := pdu.Value.(type) {
+			case string:
+				s = v
+			case []byte:
+				s = string(v)
+			default:
+				return 0
+			}
+			i, _ := strconv.ParseInt(s, 10, 32)
+			return int32(i)
+		} else {
+			switch v := pdu.Value.(type) {
+			case uint8:
+				return int32(v)
+			case uint16:
+				return int32(v)
+			case uint32:
+				return int32(v)
+			case uint64:
+				return int32(v)
+			case uint:
+				return int32(v)
+			case int8:
+				return int32(v)
+			case int16:
+				return int32(v)
+			case int32:
+				return v
+			case int64:
+				return int32(v)
+			case int:
+				return int32(v)
+			}
 		}
 	}
 	return 0
@@ -138,27 +194,41 @@ func GetAsInt32(pdu gosnmp.SnmpPDU) int32 {
 // If PDU value is nil, 0 will be returned.
 func GetAsInt64(pdu gosnmp.SnmpPDU) int64 {
 	if pdu.Value != nil {
-		switch v := pdu.Value.(type) {
-		case uint8:
-			return int64(v)
-		case uint16:
-			return int64(v)
-		case uint32:
-			return int64(v)
-		case uint64:
-			return int64(v)
-		case uint:
-			return int64(v)
-		case int8:
-			return int64(v)
-		case int16:
-			return int64(v)
-		case int32:
-			return int64(v)
-		case int64:
-			return v
-		case int:
-			return int64(v)
+		if pdu.Type == gosnmp.OctetString {
+			var s string
+			switch v := pdu.Value.(type) {
+			case string:
+				s = v
+			case []byte:
+				s = string(v)
+			default:
+				return 0
+			}
+			i, _ := strconv.ParseInt(s, 10, 64)
+			return i
+		} else {
+			switch v := pdu.Value.(type) {
+			case uint8:
+				return int64(v)
+			case uint16:
+				return int64(v)
+			case uint32:
+				return int64(v)
+			case uint64:
+				return int64(v)
+			case uint:
+				return int64(v)
+			case int8:
+				return int64(v)
+			case int16:
+				return int64(v)
+			case int32:
+				return int64(v)
+			case int64:
+				return v
+			case int:
+				return int64(v)
+			}
 		}
 	}
 	return 0
@@ -170,27 +240,41 @@ func GetAsInt64(pdu gosnmp.SnmpPDU) int64 {
 // If PDU value is nil, 0 will be returned.
 func GetAsInt(pdu gosnmp.SnmpPDU) int {
 	if pdu.Value != nil {
-		switch v := pdu.Value.(type) {
-		case uint8:
-			return int(v)
-		case uint16:
-			return int(v)
-		case uint32:
-			return int(v)
-		case uint64:
-			return int(v)
-		case uint:
-			return int(v)
-		case int8:
-			return int(v)
-		case int16:
-			return int(v)
-		case int32:
-			return int(v)
-		case int64:
-			return int(v)
-		case int:
-			return v
+		if pdu.Type == gosnmp.OctetString {
+			var s string
+			switch v := pdu.Value.(type) {
+			case string:
+				s = v
+			case []byte:
+				s = string(v)
+			default:
+				return 0
+			}
+			i, _ := strconv.ParseInt(s, 10, 64)
+			return int(i)
+		} else {
+			switch v := pdu.Value.(type) {
+			case uint8:
+				return int(v)
+			case uint16:
+				return int(v)
+			case uint32:
+				return int(v)
+			case uint64:
+				return int(v)
+			case uint:
+				return int(v)
+			case int8:
+				return int(v)
+			case int16:
+				return int(v)
+			case int32:
+				return int(v)
+			case int64:
+				return int(v)
+			case int:
+				return v
+			}
 		}
 	}
 	return 0
