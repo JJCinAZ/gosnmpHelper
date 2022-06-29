@@ -1,7 +1,7 @@
 package gosnmpHelper
 
 import (
-	"github.com/soniah/gosnmp"
+	"github.com/gosnmp/gosnmp"
 	"strconv"
 )
 

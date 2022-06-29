@@ -2,7 +2,7 @@ package gosnmpHelper
 
 import (
 	"fmt"
-	"github.com/soniah/gosnmp"
+	"github.com/gosnmp/gosnmp"
 	"reflect"
 	"regexp"
 	"strings"

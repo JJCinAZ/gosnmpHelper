@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/gosnmp/gosnmp"
 	"github.com/jjcinaz/gosnmpHelper"
-	"github.com/soniah/gosnmp"
 	"log"
 )
 
@@ -26,7 +26,7 @@ func main() {
 		log.Fatalf("Connect() err: %v", err)
 	}
 	defer gosnmp.Default.Conn.Close()
-	result, err = gosnmp.Default.Get(gosnmpHelper.GetOidsFromStructTags(&info))
+	result, err = gosnmp.Default.Get(gosnmpHelper.GetOidsFromStructTags(&info, false))
 	if err != nil {
 		log.Fatalf("snmp failure %s", err)
 	}

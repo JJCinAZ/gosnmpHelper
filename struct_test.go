@@ -2,7 +2,7 @@ package gosnmpHelper
 
 import (
 	"github.com/davecgh/go-spew/spew"
-	snmp "github.com/soniah/gosnmp"
+	snmp "github.com/gosnmp/gosnmp"
 	"reflect"
 	"testing"
 	"time"
